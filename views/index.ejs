@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form action="/insertData" method="post" enctype="multipart/form-data">
+        <table border="" align="center" class="table">
+            <caption>
+                <h2>Add User Data</h2>
+            </caption>
+            <tr></tr>
+                <td>File</td>
+                <td><input type="file" name="image" id=""></td>
+            </tr>
+            <tr>
+                <td>Title</td>
+                <td>
+                    <input type="text" name="Title" id="">
+                    <input type="hidden" name="id" value="<%= Date.now() %>">
+                </td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td><input type="text" name="price" id=""></td>
+            </tr>
+            <tr>
+                <td>Author</td>
+                <td><input type="text" name="author" id=""></td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td>
+                    <select name="city" id="">
+                        <option value="" disabled selected>--select-city--</option>
+                        <%
+                            let City = ["Surat","Ahemdabad","Mumbai"];
+                            City.map((val,idx)=>{
+                        %>
+                                <option value="<%= val %>"><%= val %></option>
+                        <%
+                            })
+                        %>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Pages</td>
+                <td>
+                   <input type="radio" name="pages" id="" value="0-50">0-50
+                   <input type="radio" name="pages" id="" value="50-100">50-100
+                   <input type="radio" name="pages" id="" value="100-150">100-150
+                   <input type="radio" name="pages" id="" value="150-200">150-200
+                </td>
+            </tr>
+            <tr>
+                <td>Discription</td>
+                <td>
+                    <textarea name="discription" id=""></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Language</td>
+                <td>
+                   <input type="checkbox" value="hindi" id="" name="language">Hindi
+                   <input type="checkbox" value="gujarati" id="" name="language">Gujarati
+                   <input type="checkbox" value="english" id="" name="language">English
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Add Data" class="btn btn-success" ></td>
+            </tr>
+        </table>
+    </form>
+
+    <table border="" align="center">
+        <caption>
+            <h2>User Data</h2>
+        </caption>
+        <tr>
+            <td>Image</td>
+            <td>Title</td>
+            <td>Price</td>
+            <td>Author</td>
+            <td>City</td>
+            <td>Pages</td>
+            <td>Discription</td>
+            <td>Language</td>
+            <td>Action</td>
+        </tr>
+
+        <% data.map((val,idx)=>{ %>
+            <tr>
+                <td>
+                    <img src="<%= val.image %>" alt="image" width="100px">
+                </td>
+                <td><%= val.title %></td>
+                <td><%= val.price %></td>
+                <td><%= val.author %></td>
+                <td><%= val.city %></td>
+                <td><%= val.pages %></td>
+                <td><%= val.discription %></td>
+                <td><%= val.language %></td>
+                <td>
+                    <a href="/deleteData/<%= val.id %>">Delete</a>
+                    <a href="/editData/<%= val.id %>">Edit</a>
+                </td>
+            </tr>    
+        <% }) %>
+
+    </table>
+
+</body>
+</html>
